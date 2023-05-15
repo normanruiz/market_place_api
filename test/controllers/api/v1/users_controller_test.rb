@@ -20,10 +20,20 @@ class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :created
   end
 
-  test 'no se puede duplicar usuarios' do
+  test 'No se puede duplicar usuarios' do
     assert_no_difference('User.count') do
       post api_v1_users_url, params: { user: { email: @user.email, password: 'secret_passwd' } }, as: :json
     end
+    assert_response :unprocessable_entity
+  end
+
+  test 'Con los datos correctos se puede actualizar un usuario' do
+    patch api_v1_user_url(@user), params: { user: { email: @user.email, password: 'secret_passwd' } }, as: :json
+    assert_response :success
+  end
+
+  test 'Con los datos incorrectos no se puede actualizar un usuario' do
+    patch api_v1_user_url(@user), params: { user: { email: 'usertestcero', password: 'secret_passwd' } }, as: :json
     assert_response :unprocessable_entity
   end
 
