@@ -18,4 +18,10 @@ class UserTest < ActiveSupport::TestCase
     assert_not user.valid?
   end
 
+  test 'Al destruir un usuario destruir tambien sus productos' do
+    assert_difference('Product.count', -1) do
+      users(:one).destroy
+    end
+  end
+
 end
