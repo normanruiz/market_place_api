@@ -13,7 +13,7 @@
 ActiveRecord::Schema[7.0].define(version: 2023_05_20_125927) do
   create_table "products", force: :cascade do |t|
     t.string "title"
-    t.decimal "price"
+    t.float "price"
     t.boolean "published"
     t.integer "user_id", null: false
     t.datetime "created_at", null: false

@@ -11,3 +11,21 @@ two:
   price: 9.99
   published: false
   user: two
+
+three:
+  title: TV Plosmo Philopps
+  price: 9999.99
+  published: false
+  user: two
+
+four:
+  title: Azos Zeenbok
+  price: 499.99
+  published: false
+  user: two
+
+five:
+  title: Cheap TV
+  price: 99.99
+  published: false
+  user: two
