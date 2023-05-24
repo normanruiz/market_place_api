@@ -29,4 +29,32 @@ class ProductTest < ActiveSupport::TestCase
     assert_equal [products(:three), products(:four), products(:one), products(:five), products(:two)], Product.recent.to_a
   end
 
+  test '"videojuego" con precio minimo de 100  no existe' do
+    search_hash = {
+      keyword: 'videojuego',
+      min_price: 100
+    }
+    assert Product.search(search_hash).empty?
+  end
+
+  test 'Encontrar el producto y precio buscado' do
+    search_hash = {
+      keyword: 'tv',
+      min_price: 50,
+      max_price: 100
+    }
+    assert_equal [products(:five)], Product.search(search_hash) 
+  end
+
+  test 'Mostrar todo los productos si no se especifico filtro' do
+    assert_equal Product.all.to_a, Product.search({})
+  end
+
+  test 'Buscar un producto por su id' do
+    search_hash = {
+      products_ids: [products(:one).id]
+    }
+    assert_equal [products(:one)], Product.search(search_hash) 
+  end
+
 end
